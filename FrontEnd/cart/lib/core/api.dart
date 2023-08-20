@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-const String BASE_URL = "http://192.168.19.122:5000/api";
+const String BASE_URL = "http://10.169.7.92:5000/api";
 const Map<String, dynamic> DEFAULT_HEADERS = {
   'Content-Type': 'application/json'
 };
@@ -36,7 +36,7 @@ class ApiResponse {
   factory ApiResponse.fromResponce(Response response) {
     final data = response.data as Map<String, dynamic>;
     return ApiResponse(
-        success: data["success"],
+        success: data["sucess"],
         data: data["data"],
         message: data["message"] ?? "Unexpected error");
   }

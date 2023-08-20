@@ -4,20 +4,23 @@ class PrimaryTextField extends StatelessWidget {
   final String labelText;
   final TextEditingController? controller;
   final bool obscureText;
+  final String? Function(String?) validator;
 
   const PrimaryTextField(
       {super.key,
       required this.labelText,
       this.controller,
-      this.obscureText = false});
+      this.obscureText = false,
+      required this.validator});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         obscureText: obscureText,
+        validator: validator,
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
