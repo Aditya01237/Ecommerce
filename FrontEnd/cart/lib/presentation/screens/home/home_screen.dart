@@ -1,3 +1,7 @@
+import 'package:cart/presentation/screens/home/category_screen.dart';
+import 'package:cart/presentation/screens/home/profile_screen.dart';
+import 'package:cart/presentation/screens/home/user_feed_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,10 +14,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
+
+  List<Widget> screens = const [
+    UserFeedScreen(),
+    CategoryScreen(),
+    ProfileScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Home Screen")),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "S8UL STORE",
+          style: TextStyle(fontSize: 25),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(CupertinoIcons.cart_fill),
+          )
+        ],
+      ),
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: "Category",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "Profile",
+          ),
+        ],
+      ),
     );
   }
 }
