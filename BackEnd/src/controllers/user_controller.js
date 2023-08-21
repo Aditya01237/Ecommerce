@@ -8,9 +8,9 @@ const UserController = {
             const userData = req.body;
             const newUser = new UserModel(userData);
             await newUser.save();
-            return res.json({sucess:true, data:newUser, message:"User Created"});
+            return res.json({success:true, data:newUser, message:"User Created"});
         } catch (ex) {
-            return res.json({sucess:false, message:ex});
+            return res.json({success:false, message:ex});
         }
     },
 
@@ -20,18 +20,18 @@ const UserController = {
             
             const foundUser  = await UserModel.findOne({email:email});
             if(!foundUser){
-                return res.json({sucess:false, message:"User not found"});
+                return res.json({success:false, message:"User not found"});
             }
 
             const passwordMatch =  bcrypt.compareSync(password,foundUser.password);
             if(!passwordMatch){
-                return res.json({sucess:false, message:"Incorrect Password"});
+                return res.json({success:false, message:"Incorrect Password"});
             }
 
-            return res.json({sucess:true, data: foundUser});
+            return res.json({success:true, data: foundUser});
 
         } catch (ex) {
-            return res.json({sucess:false, message:ex});
+            return res.json({success:false, message:ex});
         }
     }
 

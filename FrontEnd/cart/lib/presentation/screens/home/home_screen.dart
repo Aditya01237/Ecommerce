@@ -41,22 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
+        unselectedItemColor: Colors.indigo[100],
+        fixedColor: Colors.indigo[100],
         onTap: (index) {
           setState(() {
             currentIndex = index;
           });
         },
-        items: const [
+        backgroundColor: Colors.blueGrey[900],
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
+            icon: Icon(Icons.home, color: Colors.indigo[100]),
+            label: "Home", // Change this to your desired text color
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
+            icon: Icon(Icons.category, color: Colors.indigo[100]),
             label: "Category",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person, color: Colors.indigo[100]),
             label: "Profile",
           ),
         ],

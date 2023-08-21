@@ -36,7 +36,7 @@ class ApiResponse {
   factory ApiResponse.fromResponce(Response response) {
     final data = response.data as Map<String, dynamic>;
     return ApiResponse(
-        success: data["sucess"],
+        success: data["success"],
         data: data["data"],
         message: data["message"] ?? "Unexpected error");
   }

@@ -1,5 +1,9 @@
+import 'package:cart/logic/cubits/category_cubit/category_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/cubits/category_cubit/category_state.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -11,15 +15,57 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.category),
-            title: const Text("Category title"),
-            trailing: const Icon(Icons.keyboard_arrow_right),
+    return BlocBuilder<CategoryCubit, CategoryState>(
+      builder: (context, state) {
+        if (state is CategoryLoadingState && state.categories.isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
-        });
+        }
+
+        if (state is CategoryErrorState && state.categories.isEmpty) {
+          return Center(
+            child: Text(state.message.toString()),
+          );
+        }
+
+        return ListView.builder(
+          itemCount: state.categories.length,
+          itemBuilder: (context, index) {
+            final categoryItem = state.categories[index];
+
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.indigo[100],
+                  borderRadius:
+                      BorderRadius.circular(10), // Adjust the radius as needed
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: const Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: ListTile(
+                    onTap: () {},
+                    title: Text(
+                      "${categoryItem.title}",
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                    trailing: const Icon(Icons.keyboard_arrow_right),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
