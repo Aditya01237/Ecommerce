@@ -1,4 +1,5 @@
 import 'package:cart/logic/cubits/category_cubit/category_cubit.dart';
+import 'package:cart/logic/cubits/product_cubit/product_cubit.dart';
 import 'package:cart/logic/cubits/user_cubit/user_cubit.dart';
 import 'package:cart/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class EcommerceApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserCubit()),
-        BlocProvider(create: (context) => CategoryCubit())
+        BlocProvider(create: (context) => CategoryCubit()),
+        BlocProvider(create: (context) => ProductCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

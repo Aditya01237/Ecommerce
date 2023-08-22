@@ -1,23 +1,21 @@
-import '../../../data/models/product/product_model.dart';
+import 'package:cart/logic/cubits/product_cubit/product_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../data/repositories/product_repositories.dart';
 
-abstract class ProductState {
-  final List<ProductModel> products;
-  ProductState(this.products);
-}
+class ProductCubit extends Cubit<ProductState> {
+  ProductCubit() : super(ProductInitialState()) {
+    _initialize();
+  }
 
-class ProductInitialState extends ProductState {
-  ProductInitialState() : super([]);
-}
+  final _productRepository = ProductRepository();
 
-class ProductLoadingState extends ProductState {
-  ProductLoadingState(super.products);
-}
-
-class ProductLoadedState extends ProductState {
-  ProductLoadedState(super.products);
-}
-
-class ProductErrorState extends ProductState {
-  final String message;
-  ProductErrorState(this.message, super.products);
+  void _initialize() async {
+    emit(ProductLoadingState(state.products));
+    try {
+      final products = await _productRepository.fetchAllProducts();
+      emit(ProductLoadedState(products));
+    } catch (ex) {
+      emit(ProductErrorState(ex.toString(), state.products));
+    }
+  }
 }
