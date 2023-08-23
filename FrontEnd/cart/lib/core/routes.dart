@@ -1,5 +1,7 @@
+import 'package:cart/data/models/product/product_model.dart';
 import 'package:cart/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:cart/presentation/screens/home/home_screen.dart';
+import 'package:cart/presentation/screens/product/product_details_screen.dart';
 import 'package:cart/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +35,13 @@ class Routes {
       case SplashScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => const SplashScreen(),
+        );
+
+      case ProductDetailsScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => ProductDetailsScreen(
+            productModel: settings.arguments as ProductModel,
+          ),
         );
 
       default:
