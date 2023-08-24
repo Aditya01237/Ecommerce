@@ -1,9 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cart/data/models/product/product_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
+import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/services/formatter.dart';
 import '../../widgets/primary_cart_button.dart';
+import '../cart/cart_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productModel;
@@ -26,6 +31,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           style: const TextStyle(fontSize: 25),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, CartScreen.routeName);
+            },
+            icon: const Icon(CupertinoIcons.cart_fill),
+          )
+        ],
       ),
       body: SafeArea(
         child: ListView(
@@ -61,10 +74,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         color: Colors.black),
                   ),
                   const SizedBox(height: 20),
-                  PrimaryCartButton(
-                    onPressed: () {},
-                    text: "Add to Cart",
-                  ),
+                  BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+                    bool isInCart = BlocProvider.of<CartCubit>(context)
+                        .cartContains(widget.productModel);
+
+                    return PrimaryCartButton(
+                        onPressed: () {
+                          if (isInCart) {
+                            return;
+                          }
+
+                          BlocProvider.of<CartCubit>(context)
+                              .addToCart(widget.productModel, 1);
+                        },
+                        text: (isInCart) ? "Already in Cart" : "Add to Cart");
+                  }),
                   const SizedBox(height: 20),
                   const Text(
                     "Description",
