@@ -11,7 +11,7 @@ class CartRepository {
     try {
       Response response = await _api.sendRequest.get("/cart/$userId");
 
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
 
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
@@ -34,7 +34,7 @@ class CartRepository {
       Response response =
           await _api.sendRequest.post("/cart", data: jsonEncode(data));
 
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
 
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
@@ -56,7 +56,7 @@ class CartRepository {
       Response response =
           await _api.sendRequest.delete("/cart", data: jsonEncode(data));
 
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
 
       if (!apiResponse.success) {
         throw apiResponse.message.toString();

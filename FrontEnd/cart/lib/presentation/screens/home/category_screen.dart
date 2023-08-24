@@ -1,4 +1,5 @@
 import 'package:cart/logic/cubits/category_cubit/category_cubit.dart';
+import 'package:cart/presentation/screens/product/category_product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         return ListView.builder(
           itemCount: state.categories.length,
           itemBuilder: (context, index) {
-            final categoryItem = state.categories[index];
+            final category = state.categories[index];
 
             return Padding(
               padding: const EdgeInsets.all(10.0),
@@ -53,9 +54,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 child: Center(
                   child: ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, CategoryProductScreen.routeName,
+                          arguments: category);
+                    },
                     title: Text(
-                      "${categoryItem.title}",
+                      "${category.title}",
                       style: const TextStyle(fontSize: 25),
                     ),
                     trailing: const Icon(Icons.keyboard_arrow_right),

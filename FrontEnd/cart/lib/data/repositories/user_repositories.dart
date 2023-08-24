@@ -15,7 +15,7 @@ class UserRepository {
       Response response = await _api.sendRequest.post("/user/createAccount",
           data: jsonEncode({"email": email, "password": password}));
 
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
       }
@@ -29,20 +29,31 @@ class UserRepository {
 
   Future<UserModel> signIn(
       {required String email, required String password}) async {
-    print("sigin in model called");
     try {
       Response response = await _api.sendRequest.post("/user/signIn",
           data: jsonEncode({"email": email, "password": password}));
-      print(response);
-      print("api res recived");
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
-      print(apiResponse);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
       if (!apiResponse.success) {
-        print(apiResponse.success);
         throw apiResponse.message.toString();
       }
-      print(apiResponse.success);
       //convert raw data to model
+      return UserModel.fromJson(apiResponse.data);
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> updateUser(UserModel userModel) async {
+    try {
+      Response response = await _api.sendRequest
+          .put("/user/${userModel.sId}", data: jsonEncode(userModel.toJson()));
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
       return UserModel.fromJson(apiResponse.data);
     } catch (ex) {
       rethrow;

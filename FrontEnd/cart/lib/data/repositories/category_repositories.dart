@@ -11,7 +11,7 @@ class CategoryRepository {
     try {
       Response response = await _api.sendRequest.get("/category");
 
-      ApiResponse apiResponse = ApiResponse.fromResponce(response);
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
       }

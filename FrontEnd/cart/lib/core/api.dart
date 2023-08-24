@@ -33,7 +33,7 @@ class ApiResponse {
     this.message,
   });
 
-  factory ApiResponse.fromResponce(Response response) {
+  factory ApiResponse.fromResponse(Response response) {
     final data = response.data as Map<String, dynamic>;
     return ApiResponse(
         success: data["success"],
