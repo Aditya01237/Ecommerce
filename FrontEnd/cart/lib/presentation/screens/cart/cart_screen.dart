@@ -40,7 +40,22 @@ class _CartScreenState extends State<CartScreen> {
           }
 
           if (state is CartLoadedState && state.items.isEmpty) {
-            return const Center(child: Text("Cart items will show up here.."));
+            return const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    CupertinoIcons.cart_badge_plus,
+                    size: 80,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "No Item Added",
+                    style: TextStyle(fontSize: 30),
+                  )
+                ],
+              ),
+            );
           }
 
           return Column(

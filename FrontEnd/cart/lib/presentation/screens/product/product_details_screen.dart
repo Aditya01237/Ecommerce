@@ -36,7 +36,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             onPressed: () {
               Navigator.pushNamed(context, CartScreen.routeName);
             },
-            icon: const Icon(CupertinoIcons.cart_fill),
+            icon: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return Badge(
+                  label: Text("${state.items.length}"),
+                  isLabelVisible: (state is CartLoadingState) ? false : true,
+                  child: const Icon(CupertinoIcons.cart_fill),
+                );
+              },
+            ),
           )
         ],
       ),
