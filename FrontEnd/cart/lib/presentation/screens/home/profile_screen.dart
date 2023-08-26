@@ -1,3 +1,4 @@
+import 'package:cart/presentation/screens/order/my_order_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         const Divider(),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, MyOrderScreen.routeName);
+            },
             contentPadding: EdgeInsets.zero,
             leading: const Icon(CupertinoIcons.cube_box_fill),
             title: Text(

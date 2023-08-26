@@ -4,7 +4,9 @@ import 'package:cart/logic/cubits/category_product_cubit/category_product_cubit.
 import 'package:cart/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:cart/presentation/screens/cart/cart_screen.dart';
 import 'package:cart/presentation/screens/home/home_screen.dart';
+import 'package:cart/presentation/screens/order/my_order_screen.dart';
 import 'package:cart/presentation/screens/order/order_detail_screen.dart';
+import 'package:cart/presentation/screens/order/order_placed_screen.dart';
 import 'package:cart/presentation/screens/order/provider/order_detail_provider.dart';
 import 'package:cart/presentation/screens/product/category_product_screen.dart';
 import 'package:cart/presentation/screens/product/product_details_screen.dart';
@@ -77,6 +79,16 @@ class Routes {
             create: (context) => OrderDetailProvider(),
             child: const OrderDetailScreen(),
           ),
+        );
+
+      case OrderPlacedScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => const OrderPlacedScreen(),
+        );
+
+      case MyOrderScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => const MyOrderScreen(),
         );
 
       default:

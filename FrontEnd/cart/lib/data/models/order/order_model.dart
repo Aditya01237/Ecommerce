@@ -9,13 +9,14 @@ class OrderModel {
   DateTime? updatedOn;
   DateTime? createdOn;
 
-  OrderModel(
-      {this.sId,
-      this.user,
-      this.items,
-      this.status,
-      this.updatedOn,
-      this.createdOn});
+  OrderModel({
+    this.sId,
+    this.user,
+    this.items,
+    this.status,
+    this.updatedOn,
+    this.createdOn,
+  });
 
   OrderModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

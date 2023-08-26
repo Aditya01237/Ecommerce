@@ -1,4 +1,5 @@
 import 'package:cart/presentation/screens/order/order_detail_screen.dart';
+import 'package:cart/presentation/widgets/primary_cart_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,15 +86,12 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
-                      child: CupertinoButton(
+                      child: PrimaryCartButton(
                         onPressed: () {
                           Navigator.pushNamed(
                               context, OrderDetailScreen.routeName);
                         },
-                        padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width / 22),
-                        color: AppColors.accent,
-                        child: const Text("Place Order"),
+                        text: "Place Order",
                       ),
                     ),
                   ],

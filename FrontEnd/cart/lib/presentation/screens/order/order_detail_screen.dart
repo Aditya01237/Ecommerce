@@ -2,8 +2,10 @@ import 'package:cart/core/ui.dart';
 import 'package:cart/data/models/user/user_model.dart';
 import 'package:cart/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:cart/logic/cubits/cart_cubit/cart_state.dart';
+import 'package:cart/logic/cubits/order_cubit/order_cubit.dart';
 import 'package:cart/logic/cubits/user_cubit/user_cubit.dart';
 import 'package:cart/logic/cubits/user_cubit/user_state.dart';
+import 'package:cart/presentation/screens/order/order_placed_screen.dart';
 import 'package:cart/presentation/screens/order/provider/order_detail_provider.dart';
 import 'package:cart/presentation/screens/ui/edit_profile_screen.dart';
 import 'package:cart/presentation/widgets/primary_cart_button.dart';
@@ -200,7 +202,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       ),
                     ),
                     RadioListTile(
-                      value: "pay-no-delivery",
+                      value: "pay--delivery",
                       groupValue: provider.paymentMethod,
                       contentPadding: EdgeInsets.zero,
                       onChanged: provider.changePaymentMethod,
@@ -215,7 +217,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     ),
                     const SizedBox(height: 20),
                     PrimaryCartButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        bool sucess = await BlocProvider.of<OrderCubit>(context)
+                            .createOrder(
+                          items:
+                              BlocProvider.of<CartCubit>(context).state.items,
+                          paymentMethod: Provider.of<OrderDetailProvider>(
+                                  context,
+                                  listen: false)
+                              .paymentMethod
+                              .toString(),
+                        );
+                        if (sucess) {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                          Navigator.pushNamed(
+                              context, OrderPlacedScreen.routeName);
+                        }
+                      },
                       text: "Place Order",
                     ),
                   ],
