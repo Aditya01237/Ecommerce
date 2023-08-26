@@ -29,8 +29,7 @@ class CartListView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
-            elevation: 3,
-            color: Colors.white70,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
