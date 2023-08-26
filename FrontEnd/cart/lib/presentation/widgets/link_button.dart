@@ -18,7 +18,7 @@ class LinkButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: Text(
         text,
-        style: const TextStyle(color: Colors.blue),
+        style: const TextStyle(color: Colors.blue, fontSize: 20),
       ),
     );
   }

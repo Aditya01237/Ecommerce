@@ -5,7 +5,6 @@ import 'package:input_quantity/input_quantity.dart';
 import '../../data/models/cart/cart_item_model.dart';
 import '../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../logic/services/formatter.dart';
-import 'link_button.dart';
 
 class CartListView extends StatelessWidget {
   final List<CartItemModel> items;

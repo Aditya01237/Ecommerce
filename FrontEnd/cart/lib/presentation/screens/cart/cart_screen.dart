@@ -1,3 +1,4 @@
+import 'package:cart/presentation/screens/order/order_detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,7 +86,10 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: CupertinoButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, OrderDetailScreen.routeName);
+                        },
                         padding: EdgeInsets.all(
                             MediaQuery.of(context).size.width / 22),
                         color: AppColors.accent,
