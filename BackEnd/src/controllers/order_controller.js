@@ -5,10 +5,11 @@ const OrderController = {
 
     createOrder: async function(req, res) {
         try {
-            const { user, items } = req.body;
+            const { user, items, status } = req.body;
             const newOrder = new OrderModel({
                 user: user,
-                items: items
+                items: items,
+                status: status
             });
             await newOrder.save();
 
