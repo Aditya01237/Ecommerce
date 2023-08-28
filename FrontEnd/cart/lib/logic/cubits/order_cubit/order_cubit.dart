@@ -39,13 +39,13 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<bool> createOrder(
+  Future<OrderModel?> createOrder(
       {required List<CartItemModel> items,
       required String paymentMethod}) async {
     emit(OrderLoadingState(state.orders));
     try {
       if (_userCubit.state is! UserLoggedInState) {
-        return false;
+        return null;
       }
 
       OrderModel newOrder = OrderModel(
@@ -60,11 +60,11 @@ class OrderCubit extends Cubit<OrderState> {
       List<OrderModel> orders = [order, ...state.orders];
       emit(OrderLoadedState(orders));
       _cartCubit.clearCart();
-      return true;
+      return order;
       // emit(OrderLoadedState(orders));
     } catch (ex) {
       emit(OrderErrorState(ex.toString(), state.orders));
-      return false;
+      return null;
     }
   }
 

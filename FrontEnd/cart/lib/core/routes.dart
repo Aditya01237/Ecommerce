@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/providers/login_provider.dart';
 import '../presentation/screens/auth/signup_screen.dart';
+import '../presentation/screens/order/order_failed_screen.dart';
 
 class Routes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -89,6 +90,11 @@ class Routes {
       case MyOrderScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => const MyOrderScreen(),
+        );
+
+      case OrderFailedScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => const OrderFailedScreen(),
         );
 
       default:

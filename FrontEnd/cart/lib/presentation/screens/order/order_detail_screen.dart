@@ -1,10 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cart/core/ui.dart';
+import 'package:cart/data/models/order/order_model.dart';
 import 'package:cart/data/models/user/user_model.dart';
 import 'package:cart/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:cart/logic/cubits/cart_cubit/cart_state.dart';
 import 'package:cart/logic/cubits/order_cubit/order_cubit.dart';
 import 'package:cart/logic/cubits/user_cubit/user_cubit.dart';
 import 'package:cart/logic/cubits/user_cubit/user_state.dart';
+import 'package:cart/logic/services/razorpay.dart';
+import 'package:cart/presentation/screens/order/order_failed_screen.dart';
 import 'package:cart/presentation/screens/order/order_placed_screen.dart';
 import 'package:cart/presentation/screens/order/provider/order_detail_provider.dart';
 import 'package:cart/presentation/screens/ui/edit_profile_screen.dart';
@@ -226,8 +231,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     const SizedBox(height: 20),
                     PrimaryCartButton(
                       onPressed: () async {
-                        bool sucess = await BlocProvider.of<OrderCubit>(context)
-                            .createOrder(
+                        OrderModel? newOrder =
+                            await BlocProvider.of<OrderCubit>(context)
+                                .createOrder(
                           items:
                               BlocProvider.of<CartCubit>(context).state.items,
                           paymentMethod: Provider.of<OrderDetailProvider>(
@@ -236,7 +242,37 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                               .paymentMethod
                               .toString(),
                         );
-                        if (sucess) {
+                        if (newOrder == null) return;
+
+                        if (newOrder.status == "payment-pending") {
+                          await RazorPayServices.checkoutOrder(
+                            newOrder,
+                            onSuccess: (response) async {
+                              newOrder.status = "order-placed";
+                              bool success =
+                                  await BlocProvider.of<OrderCubit>(context)
+                                      .updateOrder(newOrder,
+                                          paymentId: response.paymentId,
+                                          signature: response.signature);
+
+                              if (!success) {
+                                return;
+                              }
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                              Navigator.pushNamed(
+                                  context, OrderPlacedScreen.routeName);
+                            },
+                            onFailure: (response) {
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                              Navigator.pushNamed(
+                                  context, OrderFailedScreen.routeName);
+                            },
+                          );
+                        }
+
+                        if (newOrder.status == "order-placed") {
                           Navigator.popUntil(context, (route) => route.isFirst);
                           Navigator.pushNamed(
                               context, OrderPlacedScreen.routeName);
