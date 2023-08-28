@@ -50,7 +50,9 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                 final order = state.orders[index];
 
                 return Card(
-                  color: (index % 2 == 0) ? Colors.blueGrey[50] : null,
+                  color: (index % 2 == 0)
+                      ? Colors.indigo[50]
+                      : Colors.deepPurple[50],
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -115,7 +117,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                               ),
                             ),
                             Text(
-                              "Total:  ₹${Formatter.formatPrice(Calculations.cartTotal(order.items!))}",
+                              "Total:  ₹${Formatter.formatPrice(Calculations.cartTotal(order.items!) as int)}",
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

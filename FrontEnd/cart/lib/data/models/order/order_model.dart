@@ -6,6 +6,8 @@ class OrderModel {
   UserModel? user;
   List<CartItemModel>? items;
   String? status;
+  double? totalAmount;
+  String? razorPayOrderId;
   DateTime? updatedOn;
   DateTime? createdOn;
 
@@ -14,6 +16,8 @@ class OrderModel {
     this.user,
     this.items,
     this.status,
+    this.totalAmount,
+    this.razorPayOrderId,
     this.updatedOn,
     this.createdOn,
   });
@@ -25,6 +29,8 @@ class OrderModel {
         .map((item) => CartItemModel.fromJson(item))
         .toList();
     status = json['status'];
+    razorPayOrderId = json['razorPayOrderId'];
+    totalAmount = double.tryParse(json['totalAmount'].toString());
     updatedOn = DateTime.tryParse(json['updatedOn']);
     createdOn = DateTime.tryParse(json['createdOn']);
   }
@@ -36,6 +42,8 @@ class OrderModel {
     data['items'] =
         items!.map((item) => item.toJson(objectMode: true)).toList();
     data['status'] = status;
+    data['razorPayOrderId'] = razorPayOrderId;
+    data['totalAmount'] = totalAmount;
     data['updatedOn'] = updatedOn?.toIso8601String();
     data['createdOn'] = createdOn?.toIso8601String();
     return data;

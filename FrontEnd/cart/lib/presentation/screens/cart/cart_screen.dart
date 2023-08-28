@@ -78,7 +78,7 @@ class _CartScreenState extends State<CartScreen> {
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Total: ${Formatter.formatPrice(Calculations.cartTotal(state.items))}",
+                            "Total: ${Formatter.formatPrice(Calculations.cartTotal(state.items) as int)}",
                             style: TextStyles.heading3,
                           ),
                         ],
