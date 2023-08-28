@@ -53,8 +53,8 @@ class OrderCubit extends Cubit<OrderState> {
           totalAmount: Calculations.cartTotal(items),
           user: (_userCubit.state as UserLoggedInState).userModel,
           status: (paymentMethod == "pay-on-delivery")
-              ? "Order Placed"
-              : "Payment-Pending");
+              ? "order-placed"
+              : "payment-pending");
 
       final order = await _orderRepository.createOrder(newOrder);
       List<OrderModel> orders = [order, ...state.orders];

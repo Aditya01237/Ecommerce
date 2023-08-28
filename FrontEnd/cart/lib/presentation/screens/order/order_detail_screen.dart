@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:cart/core/ui.dart';
 import 'package:cart/data/models/order/order_model.dart';
 import 'package:cart/data/models/user/user_model.dart';
@@ -215,7 +213,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       ),
                     ),
                     RadioListTile(
-                      value: "pay--delivery",
+                      value: "pay-on-delivery",
                       groupValue: provider.paymentMethod,
                       contentPadding: EdgeInsets.zero,
                       onChanged: provider.changePaymentMethod,

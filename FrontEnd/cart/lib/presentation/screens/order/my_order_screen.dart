@@ -117,7 +117,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                               ),
                             ),
                             Text(
-                              "Total:  ₹${Formatter.formatPrice(Calculations.cartTotal(order.items!) as int)}",
+                              "Total:  ₹${Formatter.formatPrice(Calculations.cartTotal(order.items!).toInt())}",
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
