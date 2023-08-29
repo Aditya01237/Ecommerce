@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import '../cart/cart_item_model.dart';
 import '../user/user_model.dart';
 
-class OrderModel {
+class OrderModel extends Equatable {
   String? sId;
   UserModel? user;
   List<CartItemModel>? items;
@@ -49,6 +50,6 @@ class OrderModel {
     return data;
   }
 
-  // @override
-  // List<Object?> get props => [sId];
+  @override
+  List<Object?> get props => [sId];
 }

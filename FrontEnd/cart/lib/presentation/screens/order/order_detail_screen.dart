@@ -15,7 +15,6 @@ import 'package:cart/presentation/widgets/primary_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-
 import '../../widgets/order_list_view.dart';
 
 class OrderDetailScreen extends StatefulWidget {

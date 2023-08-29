@@ -9,7 +9,7 @@ class RazorPayServices {
     required Function(PaymentFailureResponse) onFailure,
   }) async {
     var options = {
-      'key': 'rzp_test_09AVqbkjcSmzKv',
+      'key': 'rzp_test_WHKyCjI3F7uVCh',
       'order_id': "${orderModel.razorPayOrderId}",
       'name': 'Ecommerce App',
       'description': "${orderModel.sId}",
