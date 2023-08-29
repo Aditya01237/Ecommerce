@@ -54,7 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
                   return Badge(
                     label: Text("${state.items.length}"),
-                    isLabelVisible: (state is CartLoadingState) ? false : true,
+                    isLabelVisible:
+                        (state is CartLoadingState || state.items.isEmpty)
+                            ? false
+                            : true,
                     child: const Icon(CupertinoIcons.cart_fill),
                   );
                 },

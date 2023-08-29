@@ -40,7 +40,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               builder: (context, state) {
                 return Badge(
                   label: Text("${state.items.length}"),
-                  isLabelVisible: (state is CartLoadingState) ? false : true,
+                  isLabelVisible:
+                      (state is CartLoadingState || state.items.isEmpty)
+                          ? false
+                          : true,
                   child: const Icon(CupertinoIcons.cart_fill),
                 );
               },
@@ -95,7 +98,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           BlocProvider.of<CartCubit>(context)
                               .addToCart(widget.productModel, 1);
                         },
-                        text: (isInCart) ? "Already in Cart" : "Add to Cart");
+                        text: (isInCart) ? "Added to Cart" : "Add to Cart");
                   }),
                   const SizedBox(height: 20),
                   const Text(

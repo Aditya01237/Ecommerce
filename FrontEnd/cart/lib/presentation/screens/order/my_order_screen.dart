@@ -48,11 +48,8 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
               },
               itemBuilder: (context, index) {
                 final order = state.orders[index];
-
                 return Card(
-                  color: (index % 2 == 0)
-                      ? Colors.indigo[50]
-                      : Colors.deepPurple[50],
+                  color: (index % 2 == 0) ? Colors.indigo[50] : Colors.grey[50],
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
