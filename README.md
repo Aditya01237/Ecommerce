@@ -23,4 +23,4 @@ This online clothing app is a full-stack mobile application built using Flutter 
 
 ## Screenshot
 
-
+<img src= "https://github.com/Aditya01237/Ecommerce/assets/80575917/5fef1c8d-52d5-40a6-a5ea-c89a54c7019c" alt="splash" width="270" height="500"/>
